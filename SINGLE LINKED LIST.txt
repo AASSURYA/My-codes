@@ -1,0 +1,241 @@
+//SINGLE LINKED LIST
+#include<stdio.h>
+struct node
+{
+  int data;
+ struct node* link;
+}*head=NULL;
+
+//INSERTION METHODS
+
+void insertionatbegin(int val)
+{
+  struct node* newNode;
+  newNode=(struct node*) malloc(sizeof(struct node));
+  newNode->data=val;
+  if(head == NULL)
+   {
+     newNode->link=NULL;
+     head=newNode;
+   }
+  else
+   {
+      newNode->link=head;
+      head=newNode;
+   }
+  printf("\nElement inserted successfully\n");
+}
+
+void insertionatend(int val)
+{
+   struct node* newNode;
+  newNode=(struct node*) malloc(sizeof(struct node));
+  newNode->data=val;
+  newNode->link=NULL;
+  if(head == NULL)
+   {
+     head=newNode;
+   }
+  else
+  {
+    struct node* temp=head;
+    while(temp->link!=NULL)
+     {
+       temp=temp->link;
+     }
+    temp->link=newNode;
+  }
+   printf("\nElement inserted successful\n");
+}
+
+void insertionatspecificlocation(int val,int loc)
+{
+  struct node* newNode;
+  newNode=(struct node*) malloc(sizeof(struct node));
+  newNode->data=val;
+  if(head == NULL)
+   {
+     newNode->link=NULL;
+     head=newNode;
+   }
+  else
+   {
+    struct node*temp=head;
+    int i;
+    for(i=1;i<loc-1;i++)
+     {
+       temp=temp->link;
+     }
+    newNode->link=temp->link;
+    temp->link=newNode;
+   }
+ printf("\nElement inserted successful\n");
+}
+
+//DELETION METHODS
+
+void deleteatbeginning()
+{
+  if(head==NULL)
+   {
+     printf("\nList is empty...!\n");
+   }
+  else
+   {
+     struct node* temp=head;
+    if(head->link==NULL)
+     {
+        head=NULL;
+        free(temp);
+       printf("\nElement deleted successful\n");
+     }
+    else
+     {
+        head=temp->link;
+         free(temp);
+        printf("\nElement deleted successfully\n");
+     }
+   }
+}
+
+void deleteatending()
+{
+   if(head==NULL)
+   {
+     printf("\nLIST IS EMPTY...!\n");
+   }
+   else
+   {
+     struct node* temp1=head,*temp2;
+     if(head->link==NULL)
+      {
+         head=NULL;
+        free(temp1);
+      }
+     else
+      {
+        while(temp1->link!=NULL)
+         {
+          temp2=temp1;
+          temp1=temp1->link;
+         }
+       temp2->link=NULL;
+       free(temp1);
+      }
+    printf("\nElement deleted successfully ...\n");
+   }
+}
+
+void deleteatspecificlocation(int val)
+{
+   struct node* temp1=head,*temp2;
+  while(temp1->data!=val)
+  { 
+    if(temp1->link==NULL)
+    {
+      printf("\nElement is not found in the list\n");
+      goto functionEnd;
+    }
+     temp2=temp1;
+    temp1=temp1->link;
+  }
+  temp2->link=temp1->link;
+  free(temp1);
+  printf("\nElement deleted successfully...\n");
+  functionEnd: 
+   printf(" ");
+}
+ 
+//Display the elements
+
+void display()
+{
+  if(head==NULL)
+  {
+   printf("\nList is empty...\n");
+  }
+  else
+  {
+    struct node* temp=head;
+    while(temp->link!=NULL)
+    {
+       printf("%d ",temp->data);
+       temp=temp->link;
+    }
+    printf("%d ", temp->data);
+  }
+}
+
+//MAIN FUNCTION
+
+int main()
+{
+  int n,e,loc;
+  printf("\n WELCOME TO SINGLE LINKED LIST\n");
+  printf("\n______________________________\n");
+  while(1)
+  {
+    printf("\n***__MENU__***\n");
+    printf("1.INSERTION\n2.DELETION\n3.DISPLAY\n");
+    printf("ENTER YOUR CHOICE:");
+    scanf("%d",&n);
+    switch(n)
+     {
+   //CASE1 FOR INSERTION THE ELEMENT
+      case 1:
+        printf("\nINSERTION CAN BE IMPLEMENTED IN 3 WAYS\n");
+        printf("1.INSERTION AT BEGINNING\n2.INSERTION AT ENDING\n3.INSERTION AT SPECIFIC LOCATION\n");
+        printf("select a choice:");
+        scanf("%d",&n);
+        switch(n)
+         {
+          case 1:
+            printf("\nEnter the number to be insert at beginning:");
+            scanf("%d",&e);
+            insertionatbegin(e);
+            break;
+          case 2:
+            printf("\nEnter the number to be insert at ending:");
+            scanf("%d",&e);
+            insertionatend(e);
+            break;
+          case 3:
+            printf("\nEnter the number to be insert at specific location:");
+            scanf("%d",&e);
+            printf("Enter the location place:");
+            scanf("%d",&loc);
+            insertionatspecificlocation(e,loc);
+            break;
+         }
+        break;
+   //CASE 2 FOR DELETION THE ELEMENT
+     case 2:
+        printf("\nDELETION CAN BE POSSIBLE IN 3 WAYS\n");
+        printf("1.DELETION AT BEGINNING\n2.DELETION AT ENDING\n3.DELETION AT ANY SPECIFIC LOCATION\n");
+        printf("Select a option:");   
+        scanf("%d",&n);
+        switch(n)
+        {
+          case 1:
+           deleteatbeginning();
+           break;
+          case 2:
+            deleteatending();
+            break;
+          case 3:
+             printf("\nEnter the element to be deleted:");
+             scanf("%d",&e);
+            deleteatspecificlocation(e);
+            break;
+        }
+        break;
+  //CASE 3 FOR DISPLAY THE ELEMENTS      
+     case 3:
+       display();
+       break;    
+     }
+    
+  }
+        
+    return 0;
+}
