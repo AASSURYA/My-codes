@@ -1,0 +1,95 @@
+//QUEUE IMPLEMENTATION USING LINKED LIST
+#include<stdio.h>
+
+struct node
+{
+   int data;
+   struct node* link;
+}*front=NULL,*rear=NULL;
+
+int main()
+{
+  int n,e;
+  printf("WELCOME TO QUEUE IMPLEMENTATION USING LINKED LIST\n");
+  printf("_______________________________\n");
+  while(1)
+  {
+  printf("\n1.Insertion\n2.Deletion\n3.Display\n4.exit\n");
+  printf("Enter any of the above choice:");
+  scanf("%d",&n);
+  switch(n)
+   { 
+     case 1:
+        printf("\nEnter the element to be insert:");
+        scanf("%d",&e);
+        enQueue(e);
+        break;
+     case 2:
+        deQueue();
+        break;
+     case 3:
+        display();
+         break;
+     case 4:
+         exit(0);
+     default: printf("Invalid option\nEnter number between 1-4\n");
+   }
+  }
+}
+
+//for inserting the element
+enQueue(int val)
+{
+  struct node* newNode;
+  newNode=(struct node*)malloc(sizeof(struct node));
+  newNode->data=val;
+  newNode->link=NULL;
+   if(front==NULL)
+   {
+     front=rear=newNode;
+   }
+  else 
+   {
+   rear->link=newNode;
+   rear=newNode;
+   }
+    printf("\nElement %d is inserted succkessfully\n",rear->data);
+}
+
+//for deleting the element
+deQueue()
+{
+  struct node* temp=front;
+  if(front==NULL)
+   {
+     printf("\nQUEUE IS EMPTY...!\n");
+   }
+  else
+  {
+   front=temp->link;
+   printf("\n%d is deleted successfully\n",temp->data);
+   free(temp);
+  }
+}
+
+//for displaying the elements
+display()
+{
+  struct node* temp=front;
+  if(front==NULL)
+  {
+    printf("\nQueue is empty...\n");
+  }
+  else
+  {
+    while(temp->link!=NULL)
+    {
+       printf("%d ",temp->data);
+       temp=temp->link;
+    }
+    printf("%d ", temp->data);
+  }
+}
+
+
+    

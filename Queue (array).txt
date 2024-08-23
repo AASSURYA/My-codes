@@ -1,0 +1,93 @@
+//QUEUE IMPLEMENTATION USING ARRAY 
+#include<stdio.h>
+#define size 5
+int a[size],rear=-1,front=-1;
+int main()
+{
+  int n,e;
+  printf("WELCOME TO QUEUE IMPLEMENTATION\n");
+  printf("_______________________________\n");
+  while(1)
+  {
+  printf("1.Insertion\n2.Deletion\n3.Display\n4.exit\n");
+  printf("Enter any of the above choice:");
+  scanf("%d",&n);
+  switch(n)
+   { 
+     case 1:
+        printf("Enter the element to be insert:");
+        scanf("%d",&e);
+        enQueue(e);
+        break;
+     case 2:
+        deQueue();
+        break;
+     case 3:
+        display();
+         break;
+     case 4:
+         exit(0);
+     default: printf("Invalid option\nEnter number between 1-4\n");
+   }
+  }
+}
+
+//for inserting the element
+enQueue(int num)
+{
+   if(rear==size-1)
+   {
+     printf("Queue is overflow\n");
+   }
+   else if(front==-1)
+   {
+     front++;
+     rear++;
+     a[rear]=num;
+     printf("Element %d is inserted successfully\n",num);
+   }
+  else 
+   {
+     rear++;
+    a[rear]=num;
+    printf("Element %d is inserted successfully\n",num);
+   }
+}
+
+//for deleting the element
+deQueue()
+{
+  if(front>=rear)
+   {
+     printf("%d is deleted successfully\n",a[front]);
+     printf("Queue is underflow\n");
+     rear=-1;
+     front=-1;
+   }
+  else
+  {
+   printf("%d is deleted successfully\n",a[front]);
+   front++;
+  }
+}
+
+//for displaying the elements
+display()
+{
+  int i;
+  if(front>rear)
+  {
+    printf("Queue is empty\n");
+  }
+  else
+  {
+    for(i=front;i<=rear;i++)
+    {
+       printf("%d ",a[i]);
+    }
+    printf("\n");
+  }
+}
+
+
+    
