@@ -1,0 +1,83 @@
+#include<stdio.h>
+#define size 5
+int a[size],top=-1;
+display();
+push(int num);
+pop();
+int main()
+{
+    int n,e;
+    printf("welcome to stack implement using array\n");
+    printf("________________________________________\n");
+    while(1)
+    {
+    printf("stack operation \n 1.insert\n 2.Delete\n 3.Display\n 4.exit\n");
+    printf("Choose any number between 1to 4:\n");
+    scanf("%d",&n);
+    switch(n)
+      {
+       case 1:
+          printf("enter the element to be inserted:\n");
+        scanf("%d",&e);
+        push(e);
+        break;
+       case 2:
+         pop();
+         break;
+       case 3:
+         display();
+         break;
+       case 4:
+          
+    default: 
+        printf("invalid number\n Choose the number between 1 to 4 only:");
+          
+      }
+    }
+  }
+    
+push(int num)
+   {
+     if(top==size-1)
+       {
+        printf("stack is overflow\n");
+       }
+    else 
+       {
+      top++;
+    a[top]=num;
+    printf("element is insorted successful\n");
+    
+      }
+   }
+
+pop()
+ {
+  if(top==-1)
+    {
+    printf("stack is underflow\n");
+    
+     }
+    else
+    {
+     printf("the deleted element is %d\n",a[top]);
+    top--;
+     }
+ }
+
+display()
+ {
+ 
+     if(top==-1)
+     {
+     printf("stack is empty\n");
+     }
+    else
+    {
+    for(int i=top;i>=0;i--)
+       {
+       printf("%d\n",a[i]);
+       }
+     }
+ }
+   
